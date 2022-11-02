@@ -1,6 +1,5 @@
 const http = require('http');
-
-const port = process.env.PORT || 3000; // Changing from 5000 to 3000 because 5000 doesn't work in macOS 13.0
+const port = process.env.PORT || 5001;
 
 const server = http.createServer((req, res) => {
   const routes = [
