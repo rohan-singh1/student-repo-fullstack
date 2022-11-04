@@ -5,6 +5,44 @@ const port = process.env.PORT || 5001;
 
 // http://localhost:5001/submit should return all the data the user entered
 
+let form_html_string = `<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>03 - Form</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="bg-dark">
+    <form class="bg-light border rounded w-50 mx-auto mt-5 p-3" action="/submit" method="post">
+      <h1 class="mt-2 mb-4">Contact Form</h1>
+
+      <div class="form-group">
+    <p><label for="nameInput">Name <sup>*</sup></label> </p>
+    <input type="text" class="form-control" id="nameInput" name="nameInput" placeholder="Enter Name" required>
+  </div>
+  <br>
+  <div class="form-group">
+    <p><label for="emailInput">Email <sup>*</sup></label> </p>
+    <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Email Address" required>
+  </div>
+  <p>
+  <div class="col-md-12">
+    <textarea type="string" class="form-control" id="messageInput" name="messageInput" placeholder="Enter your message"></textarea>
+  </div>
+  <p>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="newsletterCheckbox" name="newsletterCheckbox">
+    <label class="form-check-label" for="newsletterCheckbox">Sign up for the newsletter</label>
+  </div>
+  </p>
+  <button type="submit" class="btn btn-primary" id="reverse">Submit</button>
+  <button type="reset" class ="btn btn-secondary" id="resetButton" >Reset</button>
+    </form>
+  </body>`;
+
 const server = http.createServer((req, res) => {
   let body = '';
   req.on('data', (chunk) => { body += chunk;});
@@ -57,41 +95,3 @@ const server = http.createServer((req, res) => {
 server.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
 });
-
-let form_html_string = `<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>03 - Form</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-    />
-  </head>
-  <body class="bg-dark">
-    <form class="bg-light border rounded w-50 mx-auto mt-5 p-3" action="/submit" method="post">
-      <h1 class="mt-2 mb-4">Contact Form</h1>
-
-      <div class="form-group">
-    <p><label for="nameInput">Name <sup>*</sup></label> </p>
-    <input type="text" class="form-control" id="nameInput" name="nameInput" placeholder="Enter Name" required>
-  </div>
-  <br>
-  <div class="form-group">
-    <p><label for="emailInput">Email <sup>*</sup></label> </p>
-    <input type="email" class="form-control" id="emailInput" name="emailInput" placeholder="Email Address" required>
-  </div>
-  <p>
-  <div class="col-md-12">
-    <textarea type="string" class="form-control" id="messageInput" name="messageInput" placeholder="Enter your message"></textarea>
-  </div>
-  <p>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="newsletterCheckbox" name="newsletterCheckbox">
-    <label class="form-check-label" for="newsletterCheckbox">Sign up for the newsletter</label>
-  </div>
-  </p>
-  <button type="submit" class="btn btn-primary" id="reverse">Submit</button>
-  <button type="reset" class ="btn btn-secondary" id="resetButton" >Reset</button>
-    </form>
-  </body>`;
