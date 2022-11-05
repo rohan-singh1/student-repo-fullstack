@@ -33,7 +33,22 @@ const server = http.createServer((req, res) => {
 
   // Add your code here
 
-  res.end();
+  else if (req.url.includes('?')) {
+    let param_string = url.toString().split('?')[1];
+    let url_parameters  = new URLSearchParams(param_string);
+
+    let entries = url_parameters.entries();
+
+    res.writeHead(200, { 'Content-Type': 'text/html' });
+
+    res.write(`<TABLE BORDER = "2">`);
+    for (const [key, value] of entries) {
+      res.write(`<TR> <TD> ${key} </TD> <TD> ${value} </TD> </TR>`);
+    }
+    res.write(`</TABLE>`);
+    res.end();
+  }
+
 });
 
 server.listen(port, () => {

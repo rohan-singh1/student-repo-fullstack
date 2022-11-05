@@ -44,6 +44,70 @@ const server = http.createServer((req, res) => {
   }
 
   // Add your code here
+
+  else if (req.url === '/welcome'){
+
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write('<H1>Welcome to Rohan\'s page!</H1>');
+    res.end();
+  }
+
+  else if (req.url === '/redirect'){
+
+    res.writeHead(302, {'Location': '/redirected'});
+    res.end();
+  }
+
+  else if (req.url === '/redirected'){
+
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write('<H1>You just got redirected!</H1>');
+    res.end();
+  }
+
+  else if (req.url === '/cache'){
+
+    res.writeHead(200, {
+      'Content-Type': 'text/html',
+      'Cache-Control': 'max-age = ' + 24 * 60 * 60,});
+    res.write('<H1>This resource was cached!</H1>');
+    res.end();
+  }
+
+  else if (req.url === '/cookie'){
+
+    res.writeHead(200, {
+      'Content-Type': 'text/plain',
+      'Set-Cookie': 'hello=world',});
+    res.write('Cookies...Yummm!');
+    res.end();
+  }
+
+  else if (req.url === '/check-cookies'){
+
+    let message = "no";
+    let cookie  = decodeURIComponent(req.headers.cookie);
+    let cookie_list  = cookie.split(';');
+
+    cookie_list.every(element => {
+      if (element.includes('hello=world')) {
+        message = "yes";
+        return true;
+      }
+    });
+
+    res.writeHead(200, {
+      'Content-Type': 'text/plain',});
+    res.write(message);
+    res.end();
+  }
+
+  else {
+    res.writeHead(404, {'Content-Type': 'text/html'});
+    res.write('<H1>404 - Page not found</H1>');
+    res.end();
+  }
+
 });
 
 server.listen(port, () => {
