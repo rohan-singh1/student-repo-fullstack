@@ -5,9 +5,6 @@ const port = process.env.PORT || 5001;
 
 app.use(session({secret: "Execute_Order_66", saveUninitialized: false, resave: false, store: new session.MemoryStore()}));
 
-// Use middleware static() to serve all static files in the given folder
-app.use(express.static('public'));
-
 // Use middleware urlencoded() to parse an incoming request with a urlencoded payload and return an objectß
 app.use(express.urlencoded({ extended: false }));
 
